@@ -37,7 +37,7 @@ namespace HealthChecks.NpgSql
                     return HealthCheckResult.Healthy();
                 }
             }
-            catch (Exception ex)
+            catch (Exception ex) when (!cancellationToken.IsCancellationRequested)
             {
                 return new HealthCheckResult(context.Registration.FailureStatus, exception: ex);
             }
